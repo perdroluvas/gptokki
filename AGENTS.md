@@ -17,6 +17,19 @@ When using Bend:
   splitting), `stump.bend` (pure Gini stump), `main.bend` (IO shell),
   `LAWS.bend` (human claims), `PROOF.bend` (agent proofs)
 
+## bend_stump usage
+
+```fish
+bend bend_stump/main.bend                          # sample data.csv (8 rows -> 4/2/2)
+STUMP_CSV=/tmp/other.csv bend bend_stump/main.bend # any CSV: header x1,x2,y, then rows
+bend bend_stump/PROOF.bend                         # proof gate — must pass before commit
+```
+
+CSV: header `x1,x2,y` skipped; x1/x2 naturals, y 0/1; blank lines
+ignored, malformed lines skipped and reported. Split is a 2:1:1
+round-robin (exact 50/25/25 on multiples of 4). Gini stays in Nat
+arithmetic (F32 is unprovable): splits compare by cross-multiplication.
+
 ## Commands
 
 ```fish
