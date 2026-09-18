@@ -30,6 +30,22 @@ ignored, malformed lines skipped and reported. Split is a 2:1:1
 round-robin (exact 50/25/25 on multiples of 4). Gini stays in Nat
 arithmetic (F32 is unprovable): splits compare by cross-multiplication.
 
+## GPU (NVIDIA)
+
+`bend_stump/gpu_demo.bend` runs one balanced kernel on CPU threads and
+on the GPU (`!`). GPU builds need the CUDA toolkit (`$CUDA_HOME` or
+`/usr/local/cuda` with `nvrtc.h`; driver alone is not enough):
+
+```fish
+bend bend_stump/gpu_demo.bend -o /tmp/opencode/gpu_demo
+/tmp/opencode/gpu_demo --threads 8   # CPU parallel
+/tmp/opencode/gpu_demo --gpu 4GB      # GPU (writes gpu_demo.gpu beside it)
+```
+
+The stump itself stays on CPU by design: file IO can't run on the
+GPU, and 8 CSV rows wouldn't fill one SM. `!` is for balanced numeric
+kernels (see `pow2` in `gpu_demo.bend`).
+
 ## Commands
 
 ```fish
