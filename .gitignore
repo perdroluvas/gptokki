@@ -1,0 +1,13 @@
+# Bend build outputs
+main.js
+main.c
+main
+main.gpu
+*.gpu
+dist/
+
+# Editor / OS
+.DS_Store
+*~
+.vscode/
+.idea/
